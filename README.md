@@ -10,7 +10,7 @@ A simple program to execute the Computer Language Benchmark Game for ~20 differe
 ## Why?
 I recently made the language cobalt and wanted to make a demo to showcase its speed in comparison, so here it is. Request languages in issues.
 ## Usage
-1. Get [cobalt](https://github.com/cobalt-lang/cobalt) as it is needed for the benchmarker
+1. Get [cobaltjit](https://github.com/cobalt-lang/cobalt) as it is needed for the benchmarker
 2. Make sure you have all the other required languages/compilers
 3. `git clone` this repo
 4. Run `cobaltjit benchmark.cobalt`
