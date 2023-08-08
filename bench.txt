@@ -1,0 +1,15 @@
+Rank | Language | Average Time
+-----|----------|-------------
+1 | go | 0.89us 
+2 | c++ | 0.90us 
+3 | rust | 0.92us 
+4 | csharp | 0.98us 
+5 | c | 1.06us 
+6 | swift | 1.06us 
+7 | ruby | 1.07us 
+8 | java | 1.09us 
+9 | cobaltJIT | 4.00us 
+10 | python | 4.08us 
+11 | cobalt | 4.16us 
+12 | luajit | 4.22us 
+13 | lua | 5.05us 

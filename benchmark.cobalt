@@ -1,0 +1,52 @@
+// The Mandelbrot set algorithm benchmarker
+// Check through all /languages files and run the benchmarks
+// This script trys to avoid using any built in libraries because cobalt-1.0.0-jit lacks them.
+
+var averages = {};
+var files = ["lua.lua", "luajit.lua", "python.py", "c.c", "c++.cpp", "cobalt.cobalt", "cobaltJIT.cobalt", "go.go", "csharp.cs", "java.java", "ruby.rb", "rust.rs", "swift.swift"];
+for (i, v in pairs(files)){
+    var total = 0
+    var name, format = v->match('(.+)%.(.+)$');
+    for (index = 1,100){
+        var start = os.clock();
+        if (format == "py"){
+            os.execute("python3 languages/" .. name .. "." .. format)
+        }else if (format == "lua"){
+            if (name == "luajit"){
+                os.execute("luajit languages/" .. name .. "." .. format)
+            }else{
+                os.execute("lua languages/" .. name .. "." .. format)
+            }
+        } else if (format == "cobalt"){
+            if (name == "cobaltjit"){
+                os.execute("cobaltjit languages/" .. name .. "." .. format)
+            }else{
+                os.execute("cobalt languages/" .. name .. "." .. format)
+            }
+        }
+        var end = os.clock();
+
+        total += end - start;
+        // Clean up
+        name, format, start, result, end, executer = nil;
+    }
+    table.insert(averages, {(v->match('(.+)%.(.+)$')), string.format("%.2f", (total/100)*1000000)});
+}
+
+info("Finished running benchmarks");
+for (i, v in ipairs(averages)){
+    print(v[1], v[2])
+}
+// Sort results by lowest average time
+table.sort(averages, function(a, b){ return a[2] < b[2] });
+
+// Use io to write results as a markdown table to bench.txt
+var file = io.open("bench.txt", "w");
+file->write("Rank | Language | Average Time\n");
+file->write("-----|----------|-------------\n");
+for (i, v in ipairs(averages)){
+    print(v[1], v[2])
+    file->write(i .. " | " .. v[1] .. " | " .. v[2] .. "us \n");
+}
+file->close();
+info("Wrote results to bench.txt");
