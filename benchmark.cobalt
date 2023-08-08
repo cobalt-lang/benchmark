@@ -4,49 +4,97 @@
 
 var averages = {};
 var files = ["lua.lua", "luajit.lua", "python.py", "c.c", "c++.cpp", "cobalt.cobalt", "cobaltJIT.cobalt", "go.go", "csharp.cs", "java.java", "ruby.rb", "rust.rs", "swift.swift"];
+
+function bench(command){
+    var start_time = os.clock()
+    os.execute("time -f '%M' sh -c 'ps -o rss= -p $(pgrep -n sh)' > mem.txt && " .. command)
+    var end_time = os.clock()
+    var mem_file = io.open("mem.txt", "r")
+    var mem_usage = (mem_file->read("*all"))
+    mem_file->close()
+    os.remove("mem.txt")
+    print("Memory usage: " .. mem_usage .. " KB")
+    print("Execution time: " .. (end_time - start_time) .. " seconds")
+    return mem_usage, end_time - start_time
+}
 for (i, v in pairs(files)){
     var total = 0
+    var totalm = 0
     var name, format = v->match('(.+)%.(.+)$');
+    if (format == "c"){
+        info("Compiling C file")
+        os.execute("gcc languages/" .. name .. "." .. format.." -o languages/"..name..".out")
+    }else if(format == "cpp"){
+        info("Compiling C++ file")
+        os.execute("g++ languages/" .. name .. "." .. format.." -o languages/"..name..".out")
+    }else if(format == "rs"){
+        info("Compiling Rust file")
+        os.execute("rustc languages/" .. name .. "." .. format.." -o languages/"..name..".out")
+    }else if(format == "swift"){
+        info("Compiling Swift file")
+        os.execute("swiftc languages/" .. name .. "." .. format.." -o languages/"..name..".out")
+    }else if(format == "cs"){
+        info("Compiling C# file")
+        os.execute("mcs languages/" .. name .. "." .. format.." -out:languages/"..name..".out")
+    }
     for (index = 1,100){
-        var start = os.clock();
+        var memory, elasped
         if (format == "py"){
-            os.execute("python3 languages/" .. name .. "." .. format)
+            memory, elasped = bench("python3 languages/" .. name .. "." .. format)
         }else if (format == "lua"){
             if (name == "luajit"){
-                os.execute("luajit languages/" .. name .. "." .. format)
+                memory, elasped = bench("luajit languages/" .. name .. "." .. format)
             }else{
-                os.execute("lua languages/" .. name .. "." .. format)
+                memory, elasped = bench("lua languages/" .. name .. "." .. format)
             }
         } else if (format == "cobalt"){
             if (name == "cobaltjit"){
-                os.execute("cobaltjit languages/" .. name .. "." .. format)
+                memory, elasped = bench("cobaltjit languages/" .. name .. "." .. format)
             }else{
-                os.execute("cobalt languages/" .. name .. "." .. format)
+                memory, elasped = bench("cobalt languages/" .. name .. "." .. format)
             }
+        } else if (format == "go"){
+            memory, elasped = bench("go run languages/" .. name .. "." .. format)
+        } else if (format == "cs"){
+            memory, elasped = bench("./languages/" .. name .. ".out")
+        } else if (format == "java"){
+            memory, elasped = bench("java languages/" .. name .. "." .. format)
+        } else if (format == "rb"){
+            memory, elasped = bench("ruby languages/" .. name .. "." .. format)
+        } else if (format == "rs"){
+            memory, elasped = bench("./" .. name..".out")
+        } else if (format == "swift"){
+            memory, elasped = bench("./" .. name..".out")
+        } else if (format == "c"){
+            memory, elasped = bench("./languages/"..name..".out")
+        } else if (format == "cpp"){
+            memory, elasped = bench("./languages/"..name..".out")
+        } else {
+            elasped = 0
+            memory = 0
         }
-        var end = os.clock();
-
-        total += end - start;
+        total += elasped;
+        totalm += tonumber(memory) || 0;
         // Clean up
-        name, format, start, result, end, executer = nil;
+        name, format, start, result, end, executer = null;
     }
-    table.insert(averages, {(v->match('(.+)%.(.+)$')), string.format("%.2f", (total/100)*1000000)});
+    table.insert(averages, {(v->match('(.+)%.(.+)$')), string.format("%.2f", (total/100)*1000000), string.format("%.2f", (totalm/100))});
 }
 
 info("Finished running benchmarks");
 for (i, v in ipairs(averages)){
-    print(v[1], v[2])
+    print(v[1], v[2], v[3])
 }
 // Sort results by lowest average time
 table.sort(averages, function(a, b){ return a[2] < b[2] });
 
 // Use io to write results as a markdown table to bench.txt
 var file = io.open("bench.txt", "w");
-file->write("Rank | Language | Average Time\n");
-file->write("-----|----------|-------------\n");
+file->write("Rank | Language | Average Time | Average Memory\n");
+file->write("-----|----------|-------------|----------------\n");
 for (i, v in ipairs(averages)){
     print(v[1], v[2])
-    file->write(i .. " | " .. v[1] .. " | " .. v[2] .. "us \n");
+    file->write(i .. " | " .. v[1] .. " | " .. v[2] .. "us | " .. v[3] .. "KB\n");
 }
 file->close();
 info("Wrote results to bench.txt");
