@@ -1,15 +1,15 @@
 Rank | Language | Average Time | Average Memory
 -----|----------|-------------|----------------
-1 | java | 3.42us | 0.00KB
-2 | cobalt | 3.59us | 0.00KB
-3 | c | 3.61us | 0.00KB
-4 | ruby | 3.70us | 0.00KB
-5 | c++ | 3.76us | 0.00KB
-6 | csharp | 3.80us | 0.00KB
-7 | go | 3.83us | 0.00KB
-8 | cobaltJIT | 3.90us | 0.00KB
-9 | luajit | 4.05us | 0.00KB
-10 | rust | 4.22us | 0.00KB
-11 | python | 4.33us | 0.00KB
-12 | swift | 4.39us | 0.00KB
-13 | lua | 9.15us | 0.00KB
+1 | cobaltJIT | 3.46us | Untracked
+2 | java | 3.51us | Untracked
+3 | cobalt | 3.55us | Untracked
+4 | rust | 3.62us | Untracked
+5 | luajit | 3.63us | Untracked
+6 | go | 3.65us | Untracked
+7 | ruby | 3.71us | Untracked
+8 | python | 3.76us | Untracked
+9 | c++ | 3.79us | Untracked
+10 | csharp | 3.85us | Untracked
+11 | swift | 3.89us | Untracked
+12 | c | 4.64us | Untracked
+13 | lua | 8.15us | Untracked

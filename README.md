@@ -1,26 +1,38 @@
-# benchmark
-A simple program to execute the Computer Language Benchmark Game for ~20 different languages.
-
-## Results
+# benchmark template
+A simple program to execute benchmarks for various languages and compilers. It was made to compare the speed of cobalt to other languages.
+**Languages supported:**
+- C (gcc)
+- C++ (g++)
+- C# (mono)
+- Cobalt (cobaltjit)
+- Cobalt (cobalt)
+- Go (go)
+- Java (java)
+- Lua (lua)
+- LuaJIT (luajit)
+- Python (python)
+- Ruby (ruby)
+- Rust (rustc)
+- Swift (swift)
+## Example Results
 Rank | Language | Average Time | Average Memory
 -----|----------|-------------|----------------
-1 | cobaltJIT | 2.91us | 0.00KB
-2 | cobalt | 3.01us | 0.00KB
-3 | c++ | 3.17us | 0.00KB
-4 | c | 3.21us | 0.00KB
-5 | lua | 3.27us | 0.00KB
-6 | swift | 3.30us | 0.00KB
-7 | luajit | 3.35us | 0.00KB
-8 | csharp | 3.37us | 0.00KB
-9 | rust | 3.38us | 0.00KB
-10 | python | 3.39us | 0.00KB
-11 | go | 3.42us | 0.00KB
-12 | ruby | 3.46us | 0.00KB
-13 | java | 4.62us | 0.00KB
+1 | cobaltJIT | 3.46us | Untracked
+2 | java | 3.51us | Untracked
+3 | cobalt | 3.55us | Untracked
+4 | rust | 3.62us | Untracked
+5 | luajit | 3.63us | Untracked
+6 | go | 3.65us | Untracked
+7 | ruby | 3.71us | Untracked
+8 | python | 3.76us | Untracked
+9 | c++ | 3.79us | Untracked
+10 | csharp | 3.85us | Untracked
+11 | swift | 3.89us | Untracked
+12 | c | 4.64us | Untracked
+13 | lua | 8.15us | Untracked
+
 
 ***
-## Why?
-I recently made the language cobalt and wanted to make a demo to showcase its speed in comparison, so here it is. Request languages in issues.
 ## Usage
 1. Get [cobaltjit](https://github.com/cobalt-lang/cobalt) as it is needed for the benchmarker
 2. Make sure you have all the other required languages/compilers

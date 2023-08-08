@@ -1,4 +1,4 @@
-// The Mandelbrot set algorithm benchmarker
+// The Benchmarker
 // Check through all /languages files and run the benchmarks
 // This script trys to avoid using any built in libraries because cobalt-1.0.0-jit lacks them.
 
