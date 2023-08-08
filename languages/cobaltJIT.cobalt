@@ -1,1 +1,41 @@
-print("Hello, World!")
+// Define the bubble sort function
+function bubble_sort(t) {
+    var n = #t;
+    do {
+        var swapped = false;
+        for( i = 1, n - 1 ) {
+            if( t[i] > t[i + 1] ) {
+                t[i], t[i + 1] = t[i + 1], t[i];
+                swapped = true;
+            }
+        }
+        --n    ;
+    } while(!( ! swapped) );
+}
+
+// Define the quicksort function
+function quicksort(t, low, high) {
+    if( low < high ) {
+        var pivot = t[high];
+        var i = low - 1;
+        for( j = low, high - 1 ) {
+            if( t[j] < pivot ) {
+                ++i    ;
+                t[i], t[j] = t[j], t[i];
+            }
+        }
+        ++i    ;
+        t[i], t[high] = t[high], t[i];
+        quicksort(t, low, i - 1);
+        quicksort(t, i + 1, high);
+    }
+}
+
+
+var t = {};
+for( i = 1, 10000 ) {
+    t[i] = math.random(1, 10000);
+}
+
+bubble_sort(t);
+quicksort(t, 1, #t);

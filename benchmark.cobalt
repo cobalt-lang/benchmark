@@ -7,15 +7,11 @@ var files = ["lua.lua", "luajit.lua", "python.py", "c.c", "c++.cpp", "cobalt.cob
 
 function bench(command){
     var start_time = os.clock()
-    os.execute("time -f '%M' sh -c 'ps -o rss= -p $(pgrep -n sh)' > mem.txt && " .. command)
+    print("Process began")
+    os.execute(command)
+    print("Process ended")
     var end_time = os.clock()
-    var mem_file = io.open("mem.txt", "r")
-    var mem_usage = (mem_file->read("*all"))
-    mem_file->close()
-    os.remove("mem.txt")
-    print("Memory usage: " .. mem_usage .. " KB")
-    print("Execution time: " .. (end_time - start_time) .. " seconds")
-    return mem_usage, end_time - start_time
+    return "Not tracked", end_time - start_time
 }
 for (i, v in pairs(files)){
     var total = 0
