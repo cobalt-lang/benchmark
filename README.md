@@ -1,5 +1,7 @@
 # benchmark template
 A simple program to execute benchmarks for various languages and compilers. It was made to compare the speed of cobalt to other languages.
+
+I haven't added any code yet, but feel free to.
 **Languages supported:**
 - C (gcc)
 - C++ (g++)
@@ -17,19 +19,19 @@ A simple program to execute benchmarks for various languages and compilers. It w
 ## Example Results
 Rank | Language | Average Time | Average Memory
 -----|----------|-------------|----------------
-1 | cobaltJIT | 3.46us | Untracked
-2 | java | 3.51us | Untracked
-3 | cobalt | 3.55us | Untracked
-4 | rust | 3.62us | Untracked
-5 | luajit | 3.63us | Untracked
-6 | go | 3.65us | Untracked
-7 | ruby | 3.71us | Untracked
-8 | python | 3.76us | Untracked
-9 | c++ | 3.79us | Untracked
-10 | csharp | 3.85us | Untracked
-11 | swift | 3.89us | Untracked
-12 | c | 4.64us | Untracked
-13 | lua | 8.15us | Untracked
+1 | Languages | 3.46us | Untracked
+2 | Languages | 3.51us | Untracked
+3 | Languages | 3.55us | Untracked
+4 | Languages | 3.62us | Untracked
+5 | Languages | 3.63us | Untracked
+6 | Languages | 3.65us | Untracked
+7 | Languages | 3.71us | Untracked
+8 | Languages | 3.76us | Untracked
+9 | Languages | 3.79us | Untracked
+10 | Languages | 3.85us | Untracked
+11 | Languages | 3.89us | Untracked
+12 | Languages | 4.64us | Untracked
+13 | Languages | 8.15us | Untracked
 
 
 ***
